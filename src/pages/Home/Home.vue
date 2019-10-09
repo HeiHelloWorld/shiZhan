@@ -6,7 +6,7 @@
         <div class="homeHeader">
           <div class="homeHeader-top">
             <a class="logo" href="javascript:;"></a>
-            <div class="homeTopSearchIpt ipt">
+            <div class="homeTopSearchIpt ipt" @click="$router.push('/search')">
               <i class="icon"></i>
               <span class="placeholder">搜索商品，共23137款好物</span>
             </div>
@@ -112,6 +112,7 @@
     </div>
     <KingKongModule/>
     <FreshmanModule/>
+    <Manufacturer/>
   </div>
 </template>
 
@@ -121,6 +122,7 @@
   import HomeSwiper from "./homeSwiper"
   import KingKongModule from "./KingKongModule"
   import FreshmanModule from "./FreshmanModule"
+  import Manufacturer from './Manufacturer'
 
   export default {
 
@@ -133,7 +135,8 @@
     components: {
       HomeSwiper,
       KingKongModule,
-      FreshmanModule
+      FreshmanModule,
+      Manufacturer
     },
 
     methods: {
@@ -151,9 +154,9 @@
 <style lang='stylus' rel="stylesheet/stylus">
   #home
     width 100%
-    height 9999px
-    // max-height 999999px
-    background #ccc 
+    max-height 99999px
+    background #eee
+    margin-bottom 100px
     .headerWrap
       height 148px
       .header

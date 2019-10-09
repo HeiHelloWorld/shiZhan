@@ -28,7 +28,7 @@
             </div>
           </a>
         </div>
-        <div class="module1">
+        <div class="module1 m-bgcolor">
           <a href="javascript:;" class="activityItem">
             <div class="picWrap">
               <img src="https://yanxuan-item.nosdn.127.net/6a9e0335e23c3a2556e0536494d048c8.png?imageView&amp;thumbnail=200x200&amp;quality=75" alt="img">
@@ -86,9 +86,12 @@
           box-sizing border-box
           padding 30px 0 0 30px
         .imgWrap
-          margin 37px auto
+          margin 36px auto
           .freshImg
             margin auto 37px
+            img
+              width 258px
+              height 258px
       .right
         margin-left 4px
         .module1
@@ -108,6 +111,8 @@
               height 200px
               img
                 display inline
+                width 200px
+                height 200px
               .discount
                 position absolute
                 top 0
@@ -122,10 +127,9 @@
                 text-align center
                 opacity .8
                 .line1
-                  font-size 24px
+                  font-size 18px
                 .line2
-                  font-size 20px
-                  margin-top 7px
+                  font-size 14px
                   text-decoration line-through
             .ctn
               span
@@ -148,5 +152,7 @@
                 color #fff
                 border-radius 4px
                 background #CBB693
+        .m-bgcolor
+          background #FFECC2
 
 </style>

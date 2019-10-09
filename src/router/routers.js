@@ -6,6 +6,7 @@ import Category from "../pages/Category/Category.vue"
 import Identify from "../pages/Identify/Identify.vue"
 import ShopCart from "../pages/ShopCart/ShopCart.vue"
 import Profile from "../pages/Profile/Profile.vue"
+import Search from '../components/Search/Search.vue'
 
 export default [
   {
@@ -40,11 +41,18 @@ export default [
     path: '/profile',
     component: Profile,
     meta: {
-      isShowFooter: true
+      isShowFooter: false
     }
   },
   {
     path: '/',
     redirect: '/home'
+  },
+  {
+    path: '/search',
+    component: Search,
+    meta: {
+      isShowFooter: false
+    }
   },
 ]
