@@ -83,7 +83,7 @@
     },
 
     mounted () {
-
+      this.$store.dispatch('getHomeData')
 
     },
 
