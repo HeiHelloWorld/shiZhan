@@ -11,6 +11,7 @@ import  "lib-flexible/flexible"
 
 import './plugins/rem.js'
 import HeaderSlot from './components/HeaderSlot/HeaderSlot.vue'
+import TabsHeaderNav from "./components/TabsHeaderNav/TabsHeaderNav.vue"
 import Search from './components/Search/Search.vue'
 import Footer from "./components/Footer/Footer"
 import router from './router'
@@ -24,6 +25,7 @@ Vue.use(Button)
 Vue.component('Footer', Footer)
 Vue.component('HeaderSlot', HeaderSlot)
 Vue.component('Search', Search)
+Vue.component('TabsHeaderNav', TabsHeaderNav)
 
 
 new Vue({

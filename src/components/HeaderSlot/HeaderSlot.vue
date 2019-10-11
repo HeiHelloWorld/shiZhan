@@ -10,7 +10,7 @@
     </div>
     <div class="right_box">
       <i class="iconfont icon-sousuo" @click="$router.push('/search')"></i>
-      <i class="iconfont icon-gouwuche"></i>
+      <i class="iconfont icon-gouwuche" @click="$router.push('/shopcart')"></i>
     </div>
   </div>
 </template>
@@ -21,7 +21,7 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus" scoped>
+<style lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/mixins.styl"
   .header_slot_box
     position fixed

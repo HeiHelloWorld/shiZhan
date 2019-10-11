@@ -8,11 +8,131 @@
         </div>
       </div>
     </div>
+    <div class="category_content">
+      <div class="left_nav">
+        <div class="left_nav_list">
+          <ul>
+            <li class="active">推荐专区</li>
+            <li>推荐专区</li>
+            <li>推荐专区</li>
+            <li>推荐专区</li>
+            <li>推荐专区</li>
+            <li>推荐专区</li>
+            <li>推荐专区</li>
+            <li>推荐专区</li>
+            <li>推荐专区</li>
+            <li>推荐专区</li>
+            <li>推荐专区</li>
+            <li>推荐专区</li>
+            <li>推荐专区</li>
+          </ul>
+        </div>
+      </div>
+      <div class="right_content_wrap">
+        <div class="right_content_box">
+          <div class="right_content">
+            <div class="banner">
+              <swiper :options="swiperOption">
+                <swiper-slide v-for="(slide, index) in swiperSlides" :key="index">
+                  <img :src="slide" alt="img">
+                </swiper-slide>
+                <div class="swiper-pagination" slot="pagination"></div>
+              </swiper>
+            </div>
+            <div class="cateList">
+              <div class="cateItem">
+                <img class="cateItemImg" src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144"/>
+                <div class="cateItemTit">明星商品低至69元</div>
+              </div>
+              <div class="cateItem">
+                <img class="cateItemImg" src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144"/>
+                <div class="cateItemTit">明星商品低至69元</div>
+              </div>
+              <div class="cateItem">
+                <img class="cateItemImg" src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144"/>
+                <div class="cateItemTit">明星商品低至69元</div>
+              </div>
+              <div class="cateItem">
+                <img class="cateItemImg" src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144"/>
+                <div class="cateItemTit">明星商品低至69元</div>
+              </div>
+              <div class="cateItem">
+                <img class="cateItemImg" src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144"/>
+                <div class="cateItemTit">明星商品低至69元</div>
+              </div>
+              <div class="cateItem">
+                <img class="cateItemImg" src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144"/>
+                <div class="cateItemTit">明星商品低至69元</div>
+              </div>
+              <div class="cateItem">
+                <img class="cateItemImg" src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144"/>
+                <div class="cateItemTit">明星商品低至69元</div>
+              </div>
+              <div class="cateItem">
+                <img class="cateItemImg" src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144"/>
+                <div class="cateItemTit">明星商品低至69元</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+
+  import BScroll from '@better-scroll/core'
+
   export default {
+    
+    data() {
+      return {
+        swiperOption: {
+          pagination: {
+            el: '.swiper-pagination'
+          },
+          loop: true,
+          autoplay: true,
+        },
+        swiperSlides: ['https://yanxuan.nosdn.127.net/21eaf80574f1ce30fee388e777ccb15d.jpg?imageView&amp;quality=75&amp;thumbnail=0x196',
+          'https://yanxuan.nosdn.127.net/868844d3288f130c1aa808312dbbd1d8.png?imageView&amp;quality=75&amp;thumbnail=0x196'
+        ]
+      }
+    },
+
+    mounted() {
+
+      setInterval(() => {
+        if (this.swiperSlides.length < 2) {
+          this.swiperSlides.push(this.swiperSlides.length + 1)
+        }
+      }, 3000),
+
+      this.$nextTick(() => {
+        if(!this.bScroll){
+          this.bScroll = new BScroll(".left_nav_list", {
+            click: true,
+            scrollY: true
+          })
+        }else{
+          this.bScroll.refresh()
+        }
+
+        if(!this.bScroll1){
+          this.bScroll1 = new BScroll(".right_content_box", {
+            click: true,
+            scrollY: true
+          })
+        }else{
+          this.bScroll1.refresh()
+        }
+
+      })
+
+    },
+
+
   }
 </script>
 
@@ -50,4 +170,72 @@
           >span
             color #666
             font-size 28px
+    .category_content
+      position relative
+      width 100%
+      height 1145px
+      margin-bottom 100px
+      overflow hidden
+      font-size 28px
+      .left_nav
+        position absolute
+        left 0
+        top 0
+        padding 20px 0
+        .left_nav_list
+          height 1000px
+          >ul
+            width 162px
+            .active
+              border-left 6px solid #B4282D
+            >li
+              width 160px
+              height 50px
+              line-height 50px
+              text-align center
+              margin 30px 0
+              font-size 28px
+              border-left 6px solid #fff
+              box-sizing border-box
+      .right_content_wrap
+        margin-left 162px
+        padding 30px 30px 240px
+        height 100%
+        box-sizing border-box
+        .right_content_box
+          height 800px
+          .right_content
+            width 100%
+            .banner
+              width 528px
+              height 192px
+              margin-bottom 32px
+              .swiper-container
+                width 100%
+                height 100%
+                .swiper-wrapper
+                  width 100%
+                  height 100%
+                  .swiper-slide
+                    width 100%
+                    height 100%
+                    img
+                      width 100%
+                      height 100%
+          .cateList
+            width 528px
+            .cateItem
+              display inline-block
+              width 144px
+              height 216px
+              margin-right 32px
+              .cateItemImg
+                display inline-block
+                width 144px
+                height 144px
+              .cateItemTit
+                height 72px
+                line-height 36px
+                text-align center
+                font-size 24px
 </style>
