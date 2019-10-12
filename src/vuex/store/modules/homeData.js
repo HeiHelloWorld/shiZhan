@@ -27,7 +27,7 @@ const state = {
 
 const mutations = {
   [RECEIVE_HOMEDATA] (state,{homeData}){
-    console.log(homeData)
+
     state.homeData = homeData
   }
 }

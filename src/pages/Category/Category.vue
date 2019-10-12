@@ -10,7 +10,7 @@
     </div>
     <div class="category_content">
       <div class="left_nav">
-        <div class="left_nav_list">
+        <div class="left_nav_list" ref="left">
           <ul>
             <li class="active">推荐专区</li>
             <li>推荐专区</li>
@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="right_content_wrap">
-        <div class="right_content_box">
+        <div class="right_content_box" ref="right">
           <div class="right_content">
             <div class="banner">
               <swiper :options="swiperOption">
@@ -111,7 +111,7 @@
 
       this.$nextTick(() => {
         if(!this.bScroll){
-          this.bScroll = new BScroll(".left_nav_list", {
+          this.bScroll = new BScroll(this.$refs.left, {
             click: true,
             scrollY: true
           })
@@ -120,7 +120,7 @@
         }
 
         if(!this.bScroll1){
-          this.bScroll1 = new BScroll(".right_content_box", {
+          this.bScroll1 = new BScroll(this.$refs.right, {
             click: true,
             scrollY: true
           })

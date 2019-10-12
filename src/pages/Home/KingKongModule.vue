@@ -1,72 +1,33 @@
 <template>
   <div class="swiper-container">
-    <div class="kingkong">
-      <a class="kingkong-item" href="javascript:;">
+    <div class="kingkong" v-if="homeArr.kingKongModule">
+      <a class="kingkong-item" href="javascript:;" v-for="(item,index) in homeArr.kingKongModule.kingKongList" :key="index">
         <div class="kingkong-item-img">
-          <img src="https://yanxuan.nosdn.127.net/c6fd8835a6400b7da7a016ad85506b69.png" alt="">
+          <img :src="item.picUrl" alt="img">
         </div>
-        <div class="kingkong-item-txt">新品首发</div>
-      </a>
-      <a class="kingkong-item" href="javascript:;">
-        <div class="kingkong-item-img">
-          <img src="https://yanxuan.nosdn.127.net/c6fd8835a6400b7da7a016ad85506b69.png" alt="">
-        </div>
-        <div class="kingkong-item-txt">新品首发</div>
-      </a>
-      <a class="kingkong-item" href="javascript:;">
-        <div class="kingkong-item-img">
-          <img src="https://yanxuan.nosdn.127.net/c6fd8835a6400b7da7a016ad85506b69.png" alt="">
-        </div>
-        <div class="kingkong-item-txt">新品首发</div>
-      </a>
-      <a class="kingkong-item" href="javascript:;">
-        <div class="kingkong-item-img">
-          <img src="https://yanxuan.nosdn.127.net/c6fd8835a6400b7da7a016ad85506b69.png" alt="">
-        </div>
-        <div class="kingkong-item-txt">新品首发</div>
-      </a>
-      <a class="kingkong-item" href="javascript:;">
-        <div class="kingkong-item-img">
-          <img src="https://yanxuan.nosdn.127.net/c6fd8835a6400b7da7a016ad85506b69.png" alt="">
-        </div>
-        <div class="kingkong-item-txt">新品首发</div>
-      </a>
-      <a class="kingkong-item" href="javascript:;">
-        <div class="kingkong-item-img">
-          <img src="https://yanxuan.nosdn.127.net/c6fd8835a6400b7da7a016ad85506b69.png" alt="">
-        </div>
-        <div class="kingkong-item-txt">新品首发</div>
-      </a>
-      <a class="kingkong-item" href="javascript:;">
-        <div class="kingkong-item-img">
-          <img src="https://yanxuan.nosdn.127.net/c6fd8835a6400b7da7a016ad85506b69.png" alt="">
-        </div>
-        <div class="kingkong-item-txt">新品首发</div>
-      </a>
-      <a class="kingkong-item" href="javascript:;">
-        <div class="kingkong-item-img">
-          <img src="https://yanxuan.nosdn.127.net/c6fd8835a6400b7da7a016ad85506b69.png" alt="">
-        </div>
-        <div class="kingkong-item-txt">新品首发</div>
-      </a>
-      <a class="kingkong-item" href="javascript:;">
-        <div class="kingkong-item-img">
-          <img src="https://yanxuan.nosdn.127.net/c6fd8835a6400b7da7a016ad85506b69.png" alt="">
-        </div>
-        <div class="kingkong-item-txt">新品首发</div>
-      </a>
-      <a class="kingkong-item" href="javascript:;">
-        <div class="kingkong-item-img">
-          <img src="https://yanxuan.nosdn.127.net/c6fd8835a6400b7da7a016ad85506b69.png" alt="">
-        </div>
-        <div class="kingkong-item-txt">新品首发</div>
+        <div class="kingkong-item-txt">{{item.text}}</div>
       </a>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+
+  import { mapState } from 'vuex'
+
   export default {
+  
+    computed:{
+      ...mapState({
+        homeArr:state=>state.homeData.homeData
+      })
+    },
+    watch:{
+       homeArr(){
+         //console.log("----")
+         //console.log(this.homeArr)
+       }
+    }
 
   }
 </script>

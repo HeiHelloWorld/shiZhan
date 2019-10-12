@@ -60,7 +60,7 @@
         <span class="txt">48小时快速退款</span>
       </span>
     </div>
-    <KingKongModule/>
+    <KingKongModule />
     <FreshmanModule/>
     <Manufacturer/>
   </div>
@@ -68,6 +68,7 @@
 
 <script type="text/ecmascript-6">
   import BScroll from "@better-scroll/core"
+  import {mapState} from 'vuex'
 
   import HomeSwiper from "./homeSwiper"
   import KingKongModule from "./KingKongModule"
@@ -81,6 +82,18 @@
         isShowList: true
       }
     },
+    computed:{
+      ...mapState({
+        homeArr:state=>state.homeData.homeData
+      })
+    },
+    watch:{
+       homeArr(){
+         //console.log("----")
+         //console.log(this.homeArr)
+       }
+    },
+
 
     mounted () {
       this.$store.dispatch('getHomeData')
