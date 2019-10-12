@@ -11,20 +11,11 @@
     <div class="category_content">
       <div class="left_nav">
         <div class="left_nav_list" ref="left">
-          <ul>
-            <li class="active">推荐专区</li>
-            <li>推荐专区</li>
-            <li>推荐专区</li>
-            <li>推荐专区</li>
-            <li>推荐专区</li>
-            <li>推荐专区</li>
-            <li>推荐专区</li>
-            <li>推荐专区</li>
-            <li>推荐专区</li>
-            <li>推荐专区</li>
-            <li>推荐专区</li>
-            <li>推荐专区</li>
-            <li>推荐专区</li>
+          <ul v-if="category">
+            <li 
+             :class="{active: currIndex === index}" 
+              v-for="(item,index) in category.categoryL1List" 
+              @click="currIndex = index" >{{item.name}}</li>
           </ul>
         </div>
       </div>
@@ -39,38 +30,10 @@
                 <div class="swiper-pagination" slot="pagination"></div>
               </swiper>
             </div>
-            <div class="cateList">
-              <div class="cateItem">
-                <img class="cateItemImg" src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144"/>
-                <div class="cateItemTit">明星商品低至69元</div>
-              </div>
-              <div class="cateItem">
-                <img class="cateItemImg" src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144"/>
-                <div class="cateItemTit">明星商品低至69元</div>
-              </div>
-              <div class="cateItem">
-                <img class="cateItemImg" src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144"/>
-                <div class="cateItemTit">明星商品低至69元</div>
-              </div>
-              <div class="cateItem">
-                <img class="cateItemImg" src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144"/>
-                <div class="cateItemTit">明星商品低至69元</div>
-              </div>
-              <div class="cateItem">
-                <img class="cateItemImg" src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144"/>
-                <div class="cateItemTit">明星商品低至69元</div>
-              </div>
-              <div class="cateItem">
-                <img class="cateItemImg" src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144"/>
-                <div class="cateItemTit">明星商品低至69元</div>
-              </div>
-              <div class="cateItem">
-                <img class="cateItemImg" src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144"/>
-                <div class="cateItemTit">明星商品低至69元</div>
-              </div>
-              <div class="cateItem">
-                <img class="cateItemImg" src="https://yanxuan.nosdn.127.net/71a5f1a0299e278f8193c193d8b7d1e4.png?imageView&quality=85&thumbnail=144x144"/>
-                <div class="cateItemTit">明星商品低至69元</div>
+            <div class="cateList" v-if="category.categoryL1List">
+              <div class="cateItem" v-for="(item,index) in category.categoryL1List[currIndex].subCateList">
+                <img class="cateItemImg" :src="item.bannerUrl"/>
+                <div class="cateItemTit">{{item.name}}</div>
               </div>
             </div>
           </div>
@@ -82,12 +45,16 @@
 
 <script type="text/ecmascript-6">
 
+  import { mapState } from 'vuex'
   import BScroll from '@better-scroll/core'
 
   export default {
     
     data() {
       return {
+
+        currIndex: 0,
+
         swiperOption: {
           pagination: {
             el: '.swiper-pagination'
@@ -101,34 +68,69 @@
       }
     },
 
+    computed: {
+      ...mapState({
+        category: state => state.category.category
+      })
+    },
+
+    watch:{
+      category(){
+        console.log(this.category)
+
+        this.$nextTick(() => {
+          if(!this.bScroll){
+            this.bScroll = new BScroll(this.$refs.left, {
+              click: true,
+              scrollY: true
+            })
+          }else{
+            this.bScroll.refresh()
+          }
+
+          if(!this.bScroll1){
+            this.bScroll1 = new BScroll(this.$refs.right, {
+              click: true,
+              scrollY: true
+            })
+          }else{
+            this.bScroll1.refresh()
+          }
+
+        })
+
+      }
+    },
+
     mounted() {
+
+      this.$store.dispatch('getCateGoryData')
 
       setInterval(() => {
         if (this.swiperSlides.length < 2) {
           this.swiperSlides.push(this.swiperSlides.length + 1)
         }
-      }, 3000),
+      }, 3000)
 
-      this.$nextTick(() => {
-        if(!this.bScroll){
-          this.bScroll = new BScroll(this.$refs.left, {
-            click: true,
-            scrollY: true
-          })
-        }else{
-          this.bScroll.refresh()
-        }
+      // this.$nextTick(() => {
+      //   if(!this.bScroll){
+      //     this.bScroll = new BScroll(this.$refs.left, {
+      //       click: true,
+      //       scrollY: true
+      //     })
+      //   }else{
+      //     this.bScroll.refresh()
+      //   }
 
-        if(!this.bScroll1){
-          this.bScroll1 = new BScroll(this.$refs.right, {
-            click: true,
-            scrollY: true
-          })
-        }else{
-          this.bScroll1.refresh()
-        }
-
-      })
+      //   if(!this.bScroll1){
+      //     this.bScroll1 = new BScroll(this.$refs.right, {
+      //       click: true,
+      //       scrollY: true
+      //     })
+      //   }else{
+      //     this.bScroll1.refresh()
+      //   }
+      // })
 
     },
 
@@ -188,6 +190,7 @@
             width 162px
             .active
               border-left 6px solid #B4282D
+              color #B4282D
             >li
               width 160px
               height 50px
@@ -195,6 +198,7 @@
               text-align center
               margin 30px 0
               font-size 28px
+              color #7e8c8d
               border-left 6px solid #fff
               box-sizing border-box
       .right_content_wrap
@@ -228,7 +232,7 @@
               display inline-block
               width 144px
               height 216px
-              margin-right 32px
+              margin-right 30px
               .cateItemImg
                 display inline-block
                 width 144px

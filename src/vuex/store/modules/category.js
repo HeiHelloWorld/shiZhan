@@ -13,7 +13,7 @@ const actions = {
     const result = await reqCateGoryData()
     if (result.code === 0) {
       const category = result.data
-      console.log(category)
+      //console.log(category)
       commit(RECEIVE_CATEGORYDATA, {
         category
       })
