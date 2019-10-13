@@ -3,19 +3,24 @@
     <div class="logo">
       <img src="http://yanxuan.nosdn.127.net/bd139d2c42205f749cd4ab78fa3d6c60.png" alt="logo">
     </div>
+
     <label class="input_phone">
-      <input type="text" placeholder="请输入手机号">
+      <input type="text" v-model="user.phone" placeholder="请输入手机号">
+      <p class="phone_tip">{{phone_tips}}</p>
     </label>
+
     <label class="input_phone phone_pwd">
-      <input type="password" placeholder="请输入验证码">
+      <input type="password" v-model="user.code" placeholder="请输入验证码">
+      <p class="code_tip">{{code_tips}}</p>
       <div class="getPwd" @click="getPwd">获取验证码</div>
     </label>
+
     <div class="loginOther">
       <span>注册账号</span>
       <span>使用密码登录</span>
     </div>
     <div class="loginBtn">
-      <van-button type="danger" @click="$router.push('/profile/phonelogin')">
+      <van-button type="danger">
         <span>登录</span>
       </van-button>
       <van-button plain hairline type="danger"  @click="$router.push('/profile')">
@@ -30,11 +35,43 @@
   import { Button } from 'vant'
 
   export default {
+
+    data() {
+      return {
+        user: {
+          phone: '',
+          code: ''
+        },
+        phone_tips: '',
+        code_tips: ''
+      }
+    },
+
     methods:{
       getPwd() {
         console.log('获取验证码')
       }
+    },
+
+    watch: {
+      user: {
+        deep: true,
+        handler (user) {
+          //console.log('表单验证中.....')
+          if (/^1[34578]\d{9}$/.test(user.phone)) {
+            this.phone_tips = ''
+          } else {
+            this.phone_tips = '请输入正确的手机号'
+          }
+          if (/^[0-9]{6}$/.test(user.code)) {
+            this.code_tips = ''
+          } else {
+            this.code_tips = '验证码不正确'
+          }
+        }
+      }
     }
+
   }
 </script>
 
@@ -76,6 +113,10 @@
         border-bottom 1px solid #bdbdbd
         font-size 30px
         line-height 45px
+      p
+        height 40px
+        font-size 12px
+        color red
     .loginOther
       display flex
       justify-content space-between

@@ -3,18 +3,23 @@
     <div class="logo">
       <img src="http://yanxuan.nosdn.127.net/bd139d2c42205f749cd4ab78fa3d6c60.png" alt="logo">
     </div>
+
     <label class="input_email">
-      <input type="text" placeholder="请输入e-mail">
+      <input type="text" v-model="user.email" placeholder="请输入e-mail">
+      <p class="email_tips">{{email_tips}}</p>
     </label>
+
     <label class="input_email">
-      <input type="password" placeholder="请输入密码">
+      <input type="password" v-model="user.pwd" placeholder="请输入密码">
+      <p class="pwd_tips">{{pwd_tips}}</p>
     </label>
+
     <div class="loginOther">
       <span>注册账号</span>
       <span>忘记密码</span>
     </div>
     <div class="loginBtn">
-      <van-button type="danger" @click="$router.push('/profile/phonelogin')">
+      <van-button type="danger">
         <span>登录</span>
       </van-button>
       <van-button plain hairline type="danger"  @click="$router.push('/profile')">
@@ -29,6 +34,35 @@
   import { Button } from 'vant'
 
   export default {
+    data() {
+      return {
+        user: {
+          email: '',
+          pwd: ''
+        },
+        email_tips: '',
+        pwd_tips: ''
+      }
+    },
+
+    watch: {
+      user: {
+        deep: true,
+        handler (user) {
+          if (/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(user.email)) {
+            this.email_tips = ''
+          } else {
+            this.email_tips = '请输入正确的邮箱'
+          }
+          if (/^[A-Za-z0-9_]{6,20}$/.test(user.pwd)) {
+            this.pwd_tips = ''
+          } else {
+            this.pwd_tips = '密码只能包含6~12位字母或数字'
+          }
+        }
+      }
+    }
+
   }
 </script>
 
@@ -56,6 +90,10 @@
         border-bottom 1px solid #bdbdbd
         font-size 30px
         line-height 45px
+      p
+        height 40px
+        font-size 12px
+        color red
     .loginOther
       display flex
       justify-content space-between
