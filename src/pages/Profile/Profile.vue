@@ -7,18 +7,18 @@
         </div>
       </HeaderSlot>
     </div>
-    <div class="loginTypeWrap">
+    <div class="loginTypeWrap" v-if="$route.path === '/profile'">
       <div class="loginTypes">
         <div class="cont">
           <div class="loginLogo">
             <img src="//yanxuan.nosdn.127.net/bd139d2c42205f749cd4ab78fa3d6c60.png" alt="logo">
           </div>
           <div class="loginBtn">
-            <van-button type="danger">
+            <van-button type="danger" @click="$router.push('/profile/phonelogin')">
               <i class="iconfont icon-shouji"></i>
               <span>手机号码快捷登录</span>
             </van-button>
-            <van-button plain hairline type="danger">
+            <van-button plain hairline type="danger"  @click="$router.push('/profile/emaillogin')">
               <i class="iconfont icon-youxiang"></i>
               <span>邮箱帐号登录</span>
             </van-button>
@@ -42,6 +42,7 @@
         </ul>
       </div>
     </div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -55,7 +56,7 @@
 <style lang='stylus' rel="stylesheet/stylus">
   .profile_box
     height 100vh
-    background #eee
+    background #fff
     .headerWrap
       height 88px
     .loginTypeWrap

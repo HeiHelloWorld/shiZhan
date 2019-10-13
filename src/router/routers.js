@@ -7,6 +7,8 @@ import Identify from "../pages/Identify/Identify.vue"
 import ShopCart from "../pages/ShopCart/ShopCart.vue"
 import Profile from "../pages/Profile/Profile.vue"
 import Search from '../components/Search/Search.vue'
+import phoneLogin from "../pages/Profile/phoneLogin.vue";
+import emailLogin from "../pages/Profile/emailLogin.vue";
 
 export default [
   {
@@ -42,7 +44,17 @@ export default [
     component: Profile,
     meta: {
       isShowFooter: false
-    }
+    },
+    children:[
+      {
+        path: '/profile/phonelogin',
+        component: phoneLogin
+      },
+      {
+        path: '/profile/emaillogin',
+        component: emailLogin
+      }
+    ]
   },
   {
     path: '/',
