@@ -5,6 +5,7 @@ import actions from './actions'
 import getters from './getters'
 import mutations from './mutations'
 
+import identify from "./modules/identify"
 import category from './modules/category'
 import categoryList from './modules/categoryList'
 import homeData from "./modules/homeData"
@@ -18,6 +19,7 @@ export default new Vuex.Store({
   modules:{
     category,
     categoryList,
-    homeData
+    homeData,
+    identify
   }
 })

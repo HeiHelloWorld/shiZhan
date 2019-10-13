@@ -9,55 +9,42 @@
       </HeaderSlot>
     </div>
     <div class="tabs_header_wrap">
-      <TabsHeaderNav/>
+      <div class="tabs-header">
+        <div class="inner">
+          <div class="list" v-if="tabsArr">
+            <div class="tab" 
+              :class="{active: currIndex === index}" 
+               v-for="(item,index) in tabsArr" 
+               @click="currIndex = index" :key="index">
+              <span class="txt">
+                {{item.tabName}}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="identify_content_wrap">
-      <div class="identify_content">
-        <div class="identify_tab">
-          <div class="identify_item">
-            <img src="https://yanxuan.nosdn.127.net/9b83d46a01159e7a42d97598dc442172.jpg?imageView&quality=65&thumbnail=690y376" alt="img">
-          </div>
-        </div>
-        <div class="identify_tab">
-          <a href="javascript:;" class="identify_tab_wrap">
-            <div class="identify_item_left left_two">
+      <div class="identify_content"  v-if="recManual">
+        <div class="identify_tab" v-for="(recManualItem,index) in recManual" :key="index">
+          <a href="javascript:;" class="identify_tab_wrap" v-for="(item,index) in recManualItem.topics" :key="index">
+            <div class="identify_item_left" :class="{left_two: item.style === 1}" v-if="item.style === 1">
               <div class="identify_item_left_title">
                 <span class="left_title_avatar">
-                  <img src="https://yanxuan.nosdn.127.net/0f7bd95440a3b445fabe1d4923593950.png?imageView&quality=65&thumbnail=56y56" alt="avatar">
+                  <img :src="item.avatar" alt="avatar">
                 </span>
-                <span>网易员工精选</span>
+                <span>{{item.nickname}}</span>
               </div>
-              <div class="title">今年双十一，不多花一分冤枉钱</div>
-              <!-- <div class="desc">回馈金卡限量发售，买11元得33元</div> -->
+              <div class="title">{{item.title}}</div>
+              <div class="desc" v-if="item.subTitle">{{item.subTitle}}</div>
               <div class="u-pic">
-                <img src="https://yanxuan.nosdn.127.net/ba99757f28e54fa2882b67e35b644361.jpg?imageView&quality=65&thumbnail=690y376" alt="u-pic">
+                <img :src="item.picUrl" alt="u-pic">
               </div>
               <div class="u-rcount">
                 <i class="ico"></i>
-                <span>6908人看过</span>
+                <span>{{item.readCount}}人看过</span>
               </div>
-            </div>
-          </a>
-        </div>
-        <div class="identify_tab">
-          <a href="javascript:;" class="identify_tab_wrap">
-            <div class="identify_item_left">
-              <div class="identify_item_left_title">
-                <span class="left_title_avatar">
-                  <img src="https://yanxuan.nosdn.127.net/0f7bd95440a3b445fabe1d4923593950.png?imageView&quality=65&thumbnail=56y56" alt="avatar">
-                </span>
-                <span>网易员工精选</span>
-              </div>
-              <div class="title">今年双十一，不多花一分冤枉钱</div>
-              <div class="desc">回馈金卡限量发售，买11元得33元</div>
-              <div class="u-rcount">
-                <i class="ico"></i>
-                <span>6908人看过</span>
-              </div>
-            </div>
-            <div class="identify_item_right">
-              <img src="https://yanxuan.nosdn.127.net/79198f7552b43e77a136d16f23e0c45b.jpg?imageView&quality=65&thumbnail=272y272" alt="img">
             </div>
           </a>
         </div>
@@ -88,16 +75,106 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import { mapState } from "vuex"
+  import BScroll from '@better-scroll/core'
+
   export default {
 
     data () {
       return {
-        isFond: true
+        isFond: true,
+        currIndex: 0
+      }
+    },
+
+    computed: {
+      ...mapState(
+        { 
+          tabsArr: state => state.identify.tabsArr,
+          recManual: state => state.identify.recManual
+        }
+        )
+    },
+
+    mounted () {
+
+      this.$store.dispatch('getTabs')
+      this.$store.dispatch('getManual')
+
+      this.$nextTick(() => {
+        if(!this.bScroll){
+          this.bScroll = new BScroll(".inner", {
+            click: true,
+            scrollX: true
+          })
+        }else{
+          this.bScroll.refresh()
+        }
+      })
+
+    },
+
+
+    watch: {
+      tabsArr() {
+        this.$nextTick(() => {
+          if(!this.bScroll){
+            this.bScroll = new BScroll(".inner", {
+              click: true,
+              scrollX: true
+            })
+          }else{
+            this.bScroll.refresh()
+          }
+        })
       }
     }
 
   }
 </script>
+
+/* <div class="identify_tab">
+  <a href="javascript:;" class="identify_tab_wrap">
+    <div class="identify_item_left left_two">
+      <div class="identify_item_left_title">
+        <span class="left_title_avatar">
+          <img src="https://yanxuan.nosdn.127.net/0f7bd95440a3b445fabe1d4923593950.png?imageView&quality=65&thumbnail=56y56" alt="avatar">
+        </span>
+        <span>网易员工精选</span>
+      </div>
+      <div class="title">今年双十一，不多花一分冤枉钱</div>
+      <!-- <div class="desc">回馈金卡限量发售，买11元得33元</div> -->
+      <div class="u-pic">
+        <img src="https://yanxuan.nosdn.127.net/ba99757f28e54fa2882b67e35b644361.jpg?imageView&quality=65&thumbnail=690y376" alt="u-pic">
+      </div>
+      <div class="u-rcount">
+        <i class="ico"></i>
+        <span>6908人看过</span>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="identify_tab">
+  <a href="javascript:;" class="identify_tab_wrap">
+    <div class="identify_item_left">
+      <div class="identify_item_left_title">
+        <span class="left_title_avatar">
+          <img src="https://yanxuan.nosdn.127.net/0f7bd95440a3b445fabe1d4923593950.png?imageView&quality=65&thumbnail=56y56" alt="avatar">
+        </span>
+        <span>网易员工精选</span>
+      </div>
+      <div class="title">今年双十一，不多花一分冤枉钱</div>
+      <div class="desc">回馈金卡限量发售，买11元得33元</div>
+      <div class="u-rcount">
+        <i class="ico"></i>
+        <span>6908人看过</span>
+      </div>
+    </div>
+    <div class="identify_item_right">
+      <img src="https://yanxuan.nosdn.127.net/79198f7552b43e77a136d16f23e0c45b.jpg?imageView&quality=65&thumbnail=272y272" alt="img">
+    </div>
+  </a>
+</div> */
 
 <style lang='stylus' rel="stylesheet/stylus">
   .identify_box
@@ -106,7 +183,7 @@
     .identify_header
       width 100%
       height 88px
-      border-bottom 1px solid #D9D9D9
+      border-bottom 1px solid #d9d9d9
       .identify_header_title
         width 220px
         height 100px
@@ -118,6 +195,38 @@
       position fixed
       top 88px
       left -3px
+      .tabs-header
+      display flex
+      flex-flow row nowrap
+      background #fff
+      .inner
+        display flex
+        flex-flow row nowrap
+        height 100%
+        width 100%
+        box-sizing border-box
+        overflow hidden
+        background #fafafa
+        .list
+          display flex
+          flex-shrink 0
+          padding 0 30px
+          box-sizing border-box
+          overflow hidden
+          .active
+              border-bottom 3px solid #b4282d
+          .tab
+            box-sizing border-box
+            margin-left 20px
+            &:first-of-type
+              margin-left 0
+            .txt
+              display inline-block
+              padding 0 16px
+              line-height 60px
+              font-size 28px
+              color #333
+              text-align center
     .identify_content_wrap
       width 100%
       height 100vh

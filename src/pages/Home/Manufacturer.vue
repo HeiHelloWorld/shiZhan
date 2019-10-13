@@ -4,52 +4,18 @@
       <div class="left">品牌制造商直供</div>
       <a href="javascript:;" class="right">更多> </a>
     </div>
-    <ul class="list">
-      <a href="javascript:;" class="item">
+    <ul class="list" v-if="manuData">
+      <a 
+       :style="{backgroundImage:'url('+item.picUrl+')' }"
+       href="javascript:;" class="item" v-for="(item,index) in manuData" :key="index">
         <div class="ctn">
-          <h4 class="title">海外制造商</h4>
+          <h4 class="title">{{item.name}}</h4>
           <div>
             <span class="price">
-              <span>9.9</span>
+              <span>{{item.floorPrice}}</span>
               <span>元起</span>
             </span>
-            <i class="newIcon">上新</i>
-          </div>
-        </div>
-      </a>
-      <a href="javascript:;" class="item">
-        <div class="ctn">
-          <h4 class="title">海外制造商</h4>
-          <div>
-            <span class="price">
-              <span>9.9</span>
-              <span>元起</span>
-            </span>
-            <i class="newIcon">上新</i>
-          </div>
-        </div>
-      </a>
-      <a href="javascript:;" class="item">
-        <div class="ctn">
-          <h4 class="title">海外制造商</h4>
-          <div>
-            <span class="price">
-              <span>9.9</span>
-              <span>元起</span>
-            </span>
-            <i class="newIcon">上新</i>
-          </div>
-        </div>
-      </a>
-      <a href="javascript:;" class="item">
-        <div class="ctn">
-          <h4 class="title">海外制造商</h4>
-          <div>
-            <span class="price">
-              <span>9.9</span>
-              <span>元起</span>
-            </span>
-            <i class="newIcon">上新</i>
+            <i class="newIcon" v-if="item.newOnShelf">上新</i>
           </div>
         </div>
       </a>
@@ -58,7 +24,19 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import { mapState } from 'vuex'
   export default {
+
+    computed:{
+      ...mapState({
+        manuData: state => state.homeData.homeData.tagList
+      })
+    },
+
+    mounted() {
+      this.$store.dispatch('getHomeData')
+    }
+
   }
 </script>
 

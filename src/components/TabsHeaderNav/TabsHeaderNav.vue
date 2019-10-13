@@ -69,7 +69,6 @@
         }else{
           this.bScroll.refresh()
         }
-
       })
 
     }

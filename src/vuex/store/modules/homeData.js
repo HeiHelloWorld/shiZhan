@@ -13,6 +13,7 @@ const actions = {
     const result = await reqHomeData()
     if (result.code === 0) {
       const homeData = result.data
+      console.log(homeData)
       commit(RECEIVE_HOMEDATA, {
         homeData
       })

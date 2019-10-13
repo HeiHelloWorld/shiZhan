@@ -13,26 +13,30 @@
             <div class="loginBtn" @click="$router.push('/profile')">登录</div>
           </div>
           <div class="homeHeader-bottom">
-            <div class="tabs" v-if="isShowList">
-              <TabsHeaderNav/>
+            <div class="tabs" v-show="isShowList">
+              <div class="tabs-header">
+                <div class="inner">
+                  <div class="list">
+                    <div class="tab" :class="{active: currIndex === index}" @click="currIndex=index" v-for="(item,index) in navList" :key="index">
+                      <span class="txt">
+                        {{item}}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="tabAlter" v-else>全部频道</div>
+            <div class="tabAlter" v-show="!isShowList">全部频道</div>
             <div class="toggleWrap">
               <div class="linear"></div>
               <div class="toggle" @click="toggleShow">
                 <div class="icon" :class="{toggleRotate: !isShowList}"></div>
               </div>
             </div>
-            <div class="moreCate" v-if="!isShowList">
-              <div class="cateTag activity">推荐</div>
-              <div class="cateTag">居家生活</div>
-              <div class="cateTag">服饰鞋包</div>
-              <div class="cateTag">美食酒水</div>
-              <div class="cateTag">个护清洁</div>
-              <div class="cateTag">母婴亲子</div>
-              <div class="cateTag">运动旅行</div>
-              <div class="cateTag">数码家电</div>
-              <div class="cateTag">全球特色</div>
+            <div class="moreCateWrap" v-show="!isShowList">
+              <div class="moreCate" v-for="(item,index) in navList" :key="index">
+                <div class="cateTag" :class="{activity: currIndex === index}" @click="currIndex=index">{{item}}</div>
+              </div>
             </div>
           </div>
           <div class="mask"></div>
@@ -79,7 +83,9 @@
 
     data () {
       return {
-        isShowList: true
+        isShowList: true,
+        currIndex: 0,
+        navList: ['推荐','居家生活','服饰鞋包','美食酒水','个护清洁','母婴亲子','运动旅行','数码家电','全球特色',]
       }
     },
     computed:{
@@ -97,6 +103,18 @@
 
     mounted () {
       this.$store.dispatch('getHomeData')
+
+      this.$nextTick(() => {
+        if(!this.bScroll){
+          this.bScroll = new BScroll(".inner", {
+            click: true,
+            scrollX: true
+          })
+        }else{
+          this.bScroll.refresh()
+        }
+
+      })
 
     },
 
@@ -191,7 +209,36 @@
               padding-right 100px
               height 60px
               box-sizing border-box
-              
+              .tabs-header
+                display flex
+                flex-flow row nowrap
+                background #fff
+                .inner
+                  display flex
+                  flex-flow row nowrap
+                  height 100%
+                  width 100%
+                  overflow hidden
+                  .list
+                    display flex
+                    flex-shrink 0
+                    padding 0 30px
+                    background #fff
+                    overflow hidden
+                    .active
+                        border-bottom 3px solid #b4282d
+                    .tab
+                      box-sizing border-box
+                      margin-left 20px
+                      &:first-of-type
+                        margin-left 0
+                      .txt
+                        display inline-block
+                        padding 0 16px
+                        line-height 60px
+                        font-size 28px
+                        color #333
+                        text-align center
             .tabAlter
               position relative
               height 60px
@@ -227,25 +274,27 @@
                   width 30px
                   height 30px
                   transition transform .5s
-            .moreCate
+            .moreCateWrap
               padding-top 24px
               position relative
               z-index 5
               overflow hidden
-              .cateTag
-                width 150px
-                height 56px
-                line-height 56px
-                text-align center
-                float left
-                margin-bottom 40px
-                margin-left 30px
-                background #fafafa
-                border 1px solid #ccc
-                border-radius 4px
-              .activity
-                color #b4282d
-                border 1px solid #b4282d
+              .moreCate
+                
+                .cateTag
+                  width 150px
+                  height 56px
+                  line-height 56px
+                  text-align center
+                  float left
+                  margin-bottom 40px
+                  margin-left 30px
+                  background #fafafa
+                  border 1px solid #ccc
+                  border-radius 4px
+                .activity
+                  color #b4282d
+                  border 1px solid #b4282d
           // .mask
           //   position fixed
           //   z-index 1
