@@ -1,6 +1,6 @@
 <template>
   <swiper :options="swiperOption" class="swiperWrap">
-    <swiper-slide v-for="(slide, index) in swiperSlides" :key="index"><img :src="slide" alt="img" style="width:100%;height:100%"></swiper-slide>
+    <swiper-slide v-for="(slide, index) in swiperSlides" :key="index"><img v-lazy="slide" alt="img" style="width:100%;height:100%"></swiper-slide>
     <div class="swiper-pagination" slot="pagination"></div>
   </swiper>
 </template>

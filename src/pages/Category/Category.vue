@@ -3,7 +3,7 @@
     <div class="cate_header">
       <div class="search_box">
         <div @click="$router.push('/search')">
-          <img src="//yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/search2-2fb94833aa.png" alt="search">
+          <img v-lazy="`//yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/search2-2fb94833aa.png`" alt="search">
           <span>搜索商品，共23137件好物</span>
         </div>
       </div>
@@ -25,14 +25,14 @@
             <div class="banner">
               <swiper :options="swiperOption">
                 <swiper-slide v-for="(slide, index) in swiperSlides" :key="index">
-                  <img :src="slide" alt="img">
+                  <img v-lazy="slide" alt="img">
                 </swiper-slide>
                 <div class="swiper-pagination" slot="pagination"></div>
               </swiper>
             </div>
             <div class="cateList" v-if="category.categoryL1List">
               <div class="cateItem" v-for="(item,index) in category.categoryL1List[currIndex].subCateList">
-                <img class="cateItemImg" :src="item.bannerUrl"/>
+                <img class="cateItemImg" v-lazy="item.bannerUrl"/>
                 <div class="cateItemTit">{{item.name}}</div>
               </div>
             </div>

@@ -3,7 +3,7 @@
     <div class="kingkong" v-if="homeArr.kingKongModule">
       <a class="kingkong-item" href="javascript:;" v-for="(item,index) in homeArr.kingKongModule.kingKongList" :key="index">
         <div class="kingkong-item-img">
-          <img :src="item.picUrl" alt="img">
+          <img v-lazy="item.picUrl" alt="img">
         </div>
         <div class="kingkong-item-txt">{{item.text}}</div>
       </a>

@@ -11,7 +11,7 @@
       <div class="loginTypes">
         <div class="cont">
           <div class="loginLogo">
-            <img src="//yanxuan.nosdn.127.net/bd139d2c42205f749cd4ab78fa3d6c60.png" alt="logo">
+            <img v-lazy="`//yanxuan.nosdn.127.net/bd139d2c42205f749cd4ab78fa3d6c60.png`" alt="logo">
           </div>
           <div class="loginBtn">
             <van-button type="danger" @click="$router.push('/profile/phonelogin')">

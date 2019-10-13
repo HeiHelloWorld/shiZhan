@@ -8,7 +8,7 @@
         <div class="name">新人专享礼包</div>
         <div class="imgWrap">
           <div class="freshImg">
-            <img src="//yanxuan.nosdn.127.net/ba4d635ec94ad95b28bfab6500900659.png" alt="img">
+            <img v-lazy="`//yanxuan.nosdn.127.net/ba4d635ec94ad95b28bfab6500900659.png`" alt="img">
           </div>
         </div>
       </a>
@@ -16,7 +16,7 @@
         <div class="module1">
           <a href="javascript:;" class="activityItem">
             <div class="picWrap">
-              <img src="https://yanxuan-item.nosdn.127.net/9032e04ee24f14607f2a8b5635ebcd95.png?imageView&amp;thumbnail=200x200&amp;quality=75" alt="img">
+              <img v-lazy="`https://yanxuan-item.nosdn.127.net/9032e04ee24f14607f2a8b5635ebcd95.png?imageView&amp;thumbnail=200x200&amp;quality=75`" alt="img">
               <div class="discount">
                 <div class="line1">￥45</div>
                 <div class="line2">￥49.9</div>
@@ -31,7 +31,7 @@
         <div class="module1 m-bgcolor">
           <a href="javascript:;" class="activityItem">
             <div class="picWrap">
-              <img src="https://yanxuan-item.nosdn.127.net/6a9e0335e23c3a2556e0536494d048c8.png?imageView&amp;thumbnail=200x200&amp;quality=75" alt="img">
+              <img v-lazy="`https://yanxuan-item.nosdn.127.net/6a9e0335e23c3a2556e0536494d048c8.png?imageView&amp;thumbnail=200x200&amp;quality=75`" alt="img">
               <div class="discount">
                 <div class="line1">￥1</div>
                 <div class="line2">￥9.9</div>

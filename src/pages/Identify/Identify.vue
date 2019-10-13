@@ -32,14 +32,14 @@
             <div class="identify_item_left" :class="{left_two: item.style === 1}" v-if="item.style === 1">
               <div class="identify_item_left_title">
                 <span class="left_title_avatar">
-                  <img :src="item.avatar" alt="avatar">
+                  <img v-lazy="item.avatar" alt="avatar">
                 </span>
                 <span>{{item.nickname}}</span>
               </div>
               <div class="title">{{item.title}}</div>
               <div class="desc" v-if="item.subTitle">{{item.subTitle}}</div>
               <div class="u-pic">
-                <img :src="item.picUrl" alt="u-pic">
+                <img v-lazy="item.picUrl" alt="u-pic">
               </div>
               <div class="u-rcount">
                 <i class="ico"></i>
@@ -53,7 +53,7 @@
             <div class="identify_item_left">
               <div class="identify_item_left_title">
                 <span class="left_title_avatar">
-                  <img src="https://yanxuan.nosdn.127.net/0f7bd95440a3b445fabe1d4923593950.png?imageView&quality=65&thumbnail=56y56" alt="avatar">
+                  <img v-lazy="`https://yanxuan.nosdn.127.net/0f7bd95440a3b445fabe1d4923593950.png?imageView&quality=65&thumbnail=56y56`" alt="avatar">
                 </span>
                 <span>网易员工精选</span>
               </div>
@@ -65,7 +65,7 @@
               </div>
             </div>
             <div class="identify_item_right">
-              <img src="https://yanxuan.nosdn.127.net/79198f7552b43e77a136d16f23e0c45b.jpg?imageView&quality=65&thumbnail=272y272" alt="img">
+              <img v-lazy="`https://yanxuan.nosdn.127.net/79198f7552b43e77a136d16f23e0c45b.jpg?imageView&quality=65&thumbnail=272y272`" alt="img">
             </div>
           </a>
         </div>
@@ -138,14 +138,14 @@
     <div class="identify_item_left left_two">
       <div class="identify_item_left_title">
         <span class="left_title_avatar">
-          <img src="https://yanxuan.nosdn.127.net/0f7bd95440a3b445fabe1d4923593950.png?imageView&quality=65&thumbnail=56y56" alt="avatar">
+          <img v-lazy="`https://yanxuan.nosdn.127.net/0f7bd95440a3b445fabe1d4923593950.png?imageView&quality=65&thumbnail=56y56`" alt="avatar">
         </span>
         <span>网易员工精选</span>
       </div>
       <div class="title">今年双十一，不多花一分冤枉钱</div>
       <!-- <div class="desc">回馈金卡限量发售，买11元得33元</div> -->
       <div class="u-pic">
-        <img src="https://yanxuan.nosdn.127.net/ba99757f28e54fa2882b67e35b644361.jpg?imageView&quality=65&thumbnail=690y376" alt="u-pic">
+        <img v-lazy="`https://yanxuan.nosdn.127.net/ba99757f28e54fa2882b67e35b644361.jpg?imageView&quality=65&thumbnail=690y376`" alt="u-pic">
       </div>
       <div class="u-rcount">
         <i class="ico"></i>
@@ -159,7 +159,7 @@
     <div class="identify_item_left">
       <div class="identify_item_left_title">
         <span class="left_title_avatar">
-          <img src="https://yanxuan.nosdn.127.net/0f7bd95440a3b445fabe1d4923593950.png?imageView&quality=65&thumbnail=56y56" alt="avatar">
+          <img v-lazy="`https://yanxuan.nosdn.127.net/0f7bd95440a3b445fabe1d4923593950.png?imageView&quality=65&thumbnail=56y56`" alt="avatar">
         </span>
         <span>网易员工精选</span>
       </div>
@@ -171,7 +171,7 @@
       </div>
     </div>
     <div class="identify_item_right">
-      <img src="https://yanxuan.nosdn.127.net/79198f7552b43e77a136d16f23e0c45b.jpg?imageView&quality=65&thumbnail=272y272" alt="img">
+      <img v-lazy="`https://yanxuan.nosdn.127.net/79198f7552b43e77a136d16f23e0c45b.jpg?imageView&quality=65&thumbnail=272y272`" alt="img">
     </div>
   </a>
 </div> */

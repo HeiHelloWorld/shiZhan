@@ -1,7 +1,7 @@
 <template>
   <div class="emaillogin">
     <div class="logo">
-      <img src="http://yanxuan.nosdn.127.net/bd139d2c42205f749cd4ab78fa3d6c60.png" alt="logo">
+      <img v-lazy="`http://yanxuan.nosdn.127.net/bd139d2c42205f749cd4ab78fa3d6c60.png`" alt="logo">
     </div>
 
     <label class="input_email">
