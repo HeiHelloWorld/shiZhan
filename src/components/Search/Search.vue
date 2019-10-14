@@ -52,15 +52,14 @@
     async mounted() {
       const result = await this.$api.reqGetInit()
       this.init = result.data
-      console.log(this.init)
+      //console.log(this.init)
     },
     methods:{
       async toSearch(){
         const keywordPrefix=this.searchKey
         const result=await this.$api.reqInitSearch({keywordPrefix})
-        //console.log(result)
         this.searchArr=result.data
-        console.log(this.searchArr)
+        //console.log(this.searchArr)
       }
     },
 
@@ -129,7 +128,7 @@
       bottom 0
       z-index 1
       width 100%
-      min-height 1258px
+      min-height 1245px
       box-sizing border-box
       transform translate(0 ,100%)
       background-color #f4f4f4

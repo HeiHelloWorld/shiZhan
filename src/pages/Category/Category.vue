@@ -76,7 +76,7 @@
 
     watch:{
       category(){
-        console.log(this.category)
+        //console.log(this.category)
 
         this.$nextTick(() => {
           if(!this.bScroll){
