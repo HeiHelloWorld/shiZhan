@@ -28,17 +28,20 @@
     <div class="identify_content_wrap">
       <div class="identify_content"  v-if="recManual">
         <div class="identify_tab" v-for="(recManualItem,index) in recManual" :key="index">
-          <a href="javascript:;" class="identify_tab_wrap" v-for="(item,index) in recManualItem.topics" :key="index">
-            <div class="identify_item_left" :class="{left_two: item.style === 1}" v-if="item.style === 1">
+          <!-- <a href="javascript:;" class="identify_tab_wrap" v-for="(item,index) in recManualItem.topics" :key="index"> -->
+          <a href="javascript:;" 
+           :class="{identify_tab_wrap: item.style === 0 || item.style === 2, left_two: item.style === 1 || item.style === 3 }" 
+            v-for="(item,index) in recManualItem.topics" :key="index">
+            <div class="identify_item_left">
               <div class="identify_item_left_title">
-                <span class="left_title_avatar">
+                <span class="left_title_avatar" >
                   <img v-lazy="item.avatar" alt="avatar">
                 </span>
                 <span>{{item.nickname}}</span>
               </div>
               <div class="title">{{item.title}}</div>
-              <div class="desc" v-if="item.subTitle">{{item.subTitle}}</div>
-              <div class="u-pic">
+              <div class="desc"  v-if="item.style === 0 || item.style === 2">{{item.subTitle}}</div>
+              <div class="u-pic" v-if="item.style === 1 || item.style === 3">
                 <img v-lazy="item.picUrl" alt="u-pic">
               </div>
               <div class="u-rcount">
@@ -46,9 +49,13 @@
                 <span>{{item.readCount}}人看过</span>
               </div>
             </div>
+            <div class="identify_item_right" v-if="item.style === 0 || item.style === 2">
+              <img v-lazy="item.picUrl" alt="img">
+            </div>
           </a>
         </div>
-        <div class="identify_tab">
+
+        <!-- <div class="identify_tab">
           <a href="javascript:;" class="identify_tab_wrap">
             <div class="identify_item_left">
               <div class="identify_item_left_title">
@@ -68,7 +75,7 @@
               <img v-lazy="`https://yanxuan.nosdn.127.net/79198f7552b43e77a136d16f23e0c45b.jpg?imageView&quality=65&thumbnail=272y272`" alt="img">
             </div>
           </a>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -250,6 +257,7 @@
         .identify_tab_wrap
           display flex
           justify-content space-between
+          margin 40px 0
           .identify_item_left
             display flex
             flex-direction column
@@ -283,56 +291,11 @@
               font-size 28px
               color #7f7f7f
               line-height 30px
-            .u-rcount
-              margin-top 18px
-              font-size 24px
-              color #999
-              line-height 24px
-              .ico
-                display inline-block
-                width 21px
-                height 15px
-                vertical-align middle
-                margin-right 8px
-                background url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAUCAYAAACeXl35AAAAAXNSR0IArs4c6QAAAgFJREFUSA3FVk1LAkEYbtdYNCHK6BJdrKNg+UFElyIoirp1Kgg8RD8hO3osj9GlguhSXjqW1SHqGOFHCeIpvXgUC8IURe15xZFp21mXKBuYnXfer2ffmWdmV+oy0CKRSI8syyv1en0Z7qPoI82wNHRp2C5qtdq51+v9aJdO0nNIJBL95XI5AB8fei+6XnuH8cRisQQcDkde5CgEjEajPgQFUcGgKFigz6Fiv9vtPtayfwPMZDLmfD5/CKB1rQCjOkmSTm0224bdbi/xMV8AU6nUQKFQCMNhgnf6qQzQCF58EXubYzlagPF4vK9ard7C4GbGXxqfFEWZdTqdr5RPpkcymVTAskuI7cCy2J81+A1Rb8pZyHptvFKphAmDnLrpUSqV9lD6FMk6LQsGjqkYGEKim2Kx+Iy4YVEsck8CYx/2TQlsXIDiSuTM9FQNmBdic36MxWKrWKEzXqclm0ymJVrSXS2jWoeE92odm+vZmA+N4MhOYw955V/LBOg3AoIlnRH56dn4GCzptuzxeK5xXg54g5aMZQuCIDa1jXRkU+vVc2AcuVyucOMcEmXBojsjTEU1W2zPqLImmJChBAywB7PZPA2Gl//n4NNboNw3q9U6D/GR5r/R6GpDnjl2y1DOVoUMoKOXNwOlsWOfJx60ox9gHljwiyGB1Wn4vYCthn8xPgEMNuuoL/qqaAAAAABJRU5ErkJggg==') no-repeat 0/100%
-              span
-                display inline-block
-                vertical-align middle
-          .left_two
-            width 100%
-            .identify_item_left_title
-              display flex
-              align-items center
-              font-size 28px
-              line-height 28px
-              margin-bottom 24px
-              .left_title_avatar
-                display inline-block
-                overflow hidden
-                width 56px
-                height 56px
-                border 1px solid #d9d9d9
-                border-radius 50%
-                margin-right 10px
-                img
-                  width 100%
-                  height 100%
-            .title
-              width 100%
-              font-size 36px
-              color #333
-              margin -16px 0 16px
+              white-space nowrap
               text-overflow ellipsis
               overflow hidden
-            .u-pic
-              width 690px
-              height 376px
-              margin-bottom 20px
-              img 
-                width 100%
-                height 100%
             .u-rcount
-              margin 18px 0
+              margin-top 18px
               font-size 24px
               color #999
               line-height 24px
@@ -354,5 +317,53 @@
               display block
               width 100%
               height 100%
+        .left_two
+          width 100%
+          .identify_item_left_title
+            display flex
+            align-items center
+            font-size 28px
+            line-height 28px
+            margin-bottom 24px
+            .left_title_avatar
+              display inline-block
+              overflow hidden
+              width 56px
+              height 56px
+              border 1px solid #d9d9d9
+              border-radius 50%
+              margin-right 10px
+              img
+                width 100%
+                height 100%
+          .title
+            width 100%
+            font-size 36px
+            color #333
+            margin -16px 0 16px
+            text-overflow ellipsis
+            overflow hidden
+          .u-pic
+            width 690px
+            height 376px
+            margin-bottom 20px
+            img 
+              width 100%
+              height 100%
+          .u-rcount
+            margin 18px 0
+            font-size 24px
+            color #999
+            line-height 24px
+            .ico
+              display inline-block
+              width 21px
+              height 15px
+              vertical-align middle
+              margin-right 8px
+              background url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAUCAYAAACeXl35AAAAAXNSR0IArs4c6QAAAgFJREFUSA3FVk1LAkEYbtdYNCHK6BJdrKNg+UFElyIoirp1Kgg8RD8hO3osj9GlguhSXjqW1SHqGOFHCeIpvXgUC8IURe15xZFp21mXKBuYnXfer2ffmWdmV+oy0CKRSI8syyv1en0Z7qPoI82wNHRp2C5qtdq51+v9aJdO0nNIJBL95XI5AB8fei+6XnuH8cRisQQcDkde5CgEjEajPgQFUcGgKFigz6Fiv9vtPtayfwPMZDLmfD5/CKB1rQCjOkmSTm0224bdbi/xMV8AU6nUQKFQCMNhgnf6qQzQCF58EXubYzlagPF4vK9ard7C4GbGXxqfFEWZdTqdr5RPpkcymVTAskuI7cCy2J81+A1Rb8pZyHptvFKphAmDnLrpUSqV9lD6FMk6LQsGjqkYGEKim2Kx+Iy4YVEsck8CYx/2TQlsXIDiSuTM9FQNmBdic36MxWKrWKEzXqclm0ymJVrSXS2jWoeE92odm+vZmA+N4MhOYw955V/LBOg3AoIlnRH56dn4GCzptuzxeK5xXg54g5aMZQuCIDa1jXRkU+vVc2AcuVyucOMcEmXBojsjTEU1W2zPqLImmJChBAywB7PZPA2Gl//n4NNboNw3q9U6D/GR5r/R6GpDnjl2y1DOVoUMoKOXNwOlsWOfJx60ox9gHljwiyGB1Wn4vYCthn8xPgEMNuuoL/qqaAAAAABJRU5ErkJggg==') no-repeat 0/100%
+            span
+              display inline-block
+              vertical-align middle
  
 </style>
